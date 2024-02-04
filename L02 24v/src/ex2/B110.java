@@ -5,6 +5,6 @@ public class B110 {
         int km = 15;
         int min = 50;
         int sec = 30;
-        System.out.println(15 * (3600.0 / (50 * 60 + 30)) / 1.6);
+        System.out.println(km * (3600.0 / (min * 60 + sec)) / 1.6);
     }
 }
