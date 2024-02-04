@@ -8,7 +8,7 @@ public class B112 {
         int secondsRan = minutesRan * 60 + 35;
         double mileToKm = 1.6;
 
-        //(milesRan * mileToKm) / (secondsRan / 3600.0)
+        //(milesRan * mileToKm) / (secondsRan / 3600.0).
         System.out.println((milesRan * mileToKm) / (secondsRan / 3600.0));
     }
 }
