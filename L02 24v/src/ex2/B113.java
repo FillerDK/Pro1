@@ -12,7 +12,7 @@ public class B113 {
 
         double x = (e * d - b * f) / (a * d - b * c);
         double y = (a * f - e * c) / (a * d - b * c);
-        System.out.println(x);
-        System.out.println(y);
+        System.out.println("x = " + x);
+        System.out.println("y = " + y);
     }
 }

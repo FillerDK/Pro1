@@ -12,5 +12,7 @@ public class B16 {
             sum = sum + i;
         }
         System.out.println("Sum is equal to: " + sum);
+
+        System.out.println("Sum is equal to: " + 10 * 11 / 2);
     }
 }
