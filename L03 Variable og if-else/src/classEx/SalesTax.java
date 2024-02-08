@@ -18,7 +18,7 @@ public class SalesTax {
 
         System.out.print("Write tax amount: ");
         double tax = scan.nextDouble() / 100;
-        double salesTax = purchaseAmount * 0.06;
+        double salesTax = purchaseAmount * tax;
 
         System.out.println("Tax: $" + (int)(salesTax * 100) / 100.0);
     }

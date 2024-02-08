@@ -1,10 +1,8 @@
 package classEx;
 
-import javax.sound.midi.Soundbank;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
-public class Ex3 {
+public class E3 {
     public static void main(String[] args) {
         // Algorithm:
         // Prompt user for 3 integers

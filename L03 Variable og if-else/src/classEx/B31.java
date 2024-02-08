@@ -12,6 +12,10 @@ public class B31 {
         double b = scan.nextDouble();
         double c = scan.nextDouble();
 
+        printSolution(a, b, c);
+    }
+
+    public static void printSolution (double a, double b, double c) {
         double discriminant = Math.pow(b, 2) - 4 * a * c;
         double r1 = (-b + Math.sqrt(discriminant)) / (2 * a);
         double r2 = (-b - Math.sqrt(discriminant)) / (2 * a);
