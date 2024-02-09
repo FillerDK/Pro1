@@ -16,6 +16,8 @@ public class Ex8 {
     public static String season (int month, int day) {
         String season;
 
+        // Ikke efter opgaven, men virker
+
         if (month <= 2 || month == 12) {
             if (month == 2 && day >= 21) {
                 season = "Spring";

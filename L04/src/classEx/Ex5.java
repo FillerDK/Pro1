@@ -32,6 +32,5 @@ public class Ex5 {
         } else {
             System.out.println("SORRY, YOU LOOSE");
         }
-
     }
 }
