@@ -8,21 +8,16 @@ public class Ex2c {
     }
 
     public static int sumOddDigits (int number) {
-        //while ( < ) {
-
-        //}
-        int sum = 1234567;
         int i = 1;
-        int num = 0;
-
-        while (i <= 1) {
-
-            if (sum % 2 == 0) {
+        int sum = 0;
+        while (i <= 7) {
+            int digit = number % 10;
+            if (digit % 2 == 1) {
+                sum = sum + digit;
             }
-            sum = sum / 10;
+            number /= 10;
             i++;
         }
-
         return sum;
     }
 }
