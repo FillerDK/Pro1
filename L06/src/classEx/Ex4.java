@@ -75,22 +75,24 @@ public class Ex4 {
     }
 
     public static void exD(int rowCount) {
+        // ?????????????????
+
         for (int row = 1; row <= rowCount; row++) {
             // print row number
             System.out.printf("%2d: ", row);
-            // print stars
-            int dashCount = (rowCount - row - 1) / 2;
-            for (int i = 1; i <= dashCount; i++) {
-                System.out.print('-');
-            }
-            // print dashes
-            int starCount = rowCount - dashCount - 5;
-            for (int i = 1; i <= starCount; i++) {
-                System.out.print('*');
-            }
-            for (int i = 1; i <= dashCount; i++) {
-                System.out.print('-');
-            }
+
+            int colCount = rowCount;
+            if (rowCount % 2 == 0) colCount = rowCount - 1;
+
+            int starCount;
+            if (row <= rowCount / 2)
+                starCount = 2 * row - 1;
+            else starCount = (2 * rowCount + 1) - 2 * row;
+
+            int dashCount = rowCount - starCount;
+
+
+
             // go to next line
             System.out.println();
         }

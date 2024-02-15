@@ -11,7 +11,7 @@ public class Ex1a2a {
         int sum = num1;
 
         for (int potensMin = 0; potensMin <= potensMax; potensMin++) {
-            System.out.println("2^" + potensMin + " = " + sum + "\n");
+            System.out.println("2^" + potensMin + " = " + sum);
             sum = sum * 2;
         }
     }

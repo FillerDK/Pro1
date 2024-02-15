@@ -8,8 +8,7 @@ public class Ex2a {
         Scanner input = new Scanner(System.in);
         int inputNumber = input.nextInt();
 
-        int bigNum = 0, even = 0, odd = 0;
-        int smallNum = 999;
+        int bigNum = 0, even = 0, odd = 0, smallNum = 999;
 
         System.out.print("Enter " + inputNumber + " numbers: ");
         for (int i = 0; i < inputNumber; i++) {

@@ -10,13 +10,13 @@ public class B541 {
 
         int num = 0;
         do {
-            num = input.nextInt();
             if (num == bigNum) {
                 bigNumX++;
             } else if (num > bigNum) {
                 bigNum = num;
                 bigNumX = 1;
             }
+            num = input.nextInt();
         } while (num != 0);
 
         System.out.println("Biggest number is " + bigNum);
