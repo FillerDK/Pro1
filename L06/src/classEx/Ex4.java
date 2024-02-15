@@ -1,5 +1,7 @@
 package classEx;
 
+import java.sql.SQLOutput;
+
 public class Ex4 {
     public static void main(String[] args) {
         exA(10);
@@ -11,7 +13,7 @@ public class Ex4 {
         exC(10);
         System.out.println();
 
-        exD(10);
+        exD(39);
         System.out.println();
     }
 
@@ -75,23 +77,36 @@ public class Ex4 {
     }
 
     public static void exD(int rowCount) {
-        // ?????????????????
 
         for (int row = 1; row <= rowCount; row++) {
-            // print row number
+            // Print row number
             System.out.printf("%2d: ", row);
 
+            // Column count has to be an odd number.
+            // The diamond doesn't have a center if even.
+            // E.g. the illustration has 9 columns and 10 rows.
             int colCount = rowCount;
             if (rowCount % 2 == 0) colCount = rowCount - 1;
 
+            // Count number of starts
             int starCount;
-            if (row <= rowCount / 2)
+            if (row <= rowCount / 2) // first half of rows
                 starCount = 2 * row - 1;
-            else starCount = (2 * rowCount + 1) - 2 * row;
+            else // last half of rows
+                starCount = (2 * rowCount + 1) - 2 * row;
 
-            int dashCount = rowCount - starCount;
+            // Count number of dashes
+            int dashCount = colCount - starCount;
 
-
+            // Print left dashes
+            for (int i = 1; i <= dashCount/2; i++)
+                System.out.print(' ');
+            // Print stars
+            for (int i = 1; i <= starCount; i++)
+                System.out.print('*');
+            // Print right dashes
+            for (int i = 1; i <= dashCount/2; i++)
+                System.out.print(' ');
 
             // go to next line
             System.out.println();
