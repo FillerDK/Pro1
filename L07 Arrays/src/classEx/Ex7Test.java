@@ -10,7 +10,7 @@ public class Ex7Test {
         //System.out.println(Arrays.toString(evenToZero(array)));
         //System.out.println("The second highest number is: " + secondHighestInArray(array));
         //System.out.println("The array is sorted in ascending order: " + arraySortedAscending(array));
-        //System.out.println(Arrays.toString(reverse(array)));
+        System.out.println(Arrays.toString(reverse(array)));
         //System.out.println("The array has doublets: " + hasDoublets(array));
     }
 
@@ -46,13 +46,13 @@ public class Ex7Test {
 
     public static boolean arraySortedAscending(int[] array) {
         int previous = array[0];
-        boolean sorted;
+        boolean sorted = true;
         for (int i = 0; i < array.length; i++) {
-            if (array[i] >= previous) {
-                sorted = true;
-            } else return false;
+            if (array[i] > previous) {
+                sorted = false;
+            } else sorted = true;
         }
-        return true;
+        return sorted;
     }
 
     public static int[] reverse(int[] list) {
