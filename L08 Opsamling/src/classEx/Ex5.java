@@ -7,7 +7,6 @@ public class Ex5 {
 
         System.out.println("The two arrays are in order and have the same values: " + equals(array1, array2));
         System.out.println("The two arrays have the same values in any order, dublicates ignored: " + sameValues(array1, array2));
-        System.out.println(contains(array1, array2[0]));
     }
 
     public static boolean equals (int[] a, int[] b) {
@@ -21,23 +20,15 @@ public class Ex5 {
     }
 
     public static boolean sameValues (int[] a, int[] b) {
-        boolean sameValues = false;
-        int longestArr;
-        if (a.length > b.length) {
-            for (int i = 0; i < a.length; i++) {
-                if (contains(b, a[i])) {
-                    sameValues = true;
-                } else sameValues = false;
-            }
-        } else {
-            for (int i = 0; i < b.length; i++) {
-                if (contains(a, b[i])) {
-                    sameValues = true;
-                } else sameValues = false;
-            }
+        for (int e : a) {
+            if (!contains(b, e))
+                return false;
         }
-
-        return sameValues;
+        for (int e : b) {
+            if (!contains(a, e))
+                return false;
+        }
+        return true;
     }
 
     public static boolean contains (int[] array, int value) {

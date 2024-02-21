@@ -11,23 +11,23 @@ public class Ex1 {
 
         boolean inRun = false;
         int precedingNum = dieTosses[0];
-        System.out.print(precedingNum + " ");
+        System.out.print(precedingNum);
         for (int i = 1; i < dieTosses.length; i++) {
             if (inRun) {
                 if (dieTosses[i] != precedingNum) {
-                    System.out.print(") ");
+                    System.out.print(")");
                     inRun = false;
                 }
             }
             if (!inRun) {
                 if (i < dieTosses.length - 1) {
                     if (i != precedingNum && dieTosses[i] == dieTosses[i + 1]) {
-                        System.out.print("( ");
+                        System.out.print("(");
                         inRun = true;
                     }
                 }
             }
-            System.out.print(dieTosses[i] + " ");
+            System.out.print(dieTosses[i]);
             precedingNum = dieTosses[i];
         }
         if (inRun) {
