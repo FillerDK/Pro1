@@ -34,7 +34,7 @@ public class Gui extends Application {
         int h = 81;
 
         drawTriangle(pane, x, y, h);
-        drawInnerTriangle(pane, x, y, h);
+        drawInnerTriangle(pane, x, y, x + (2 * h/3), y - (2 * h/3), x, y - (h/3), h);
 
     }
     private void drawTriangle(Pane pane, int x, int y, int h) {
@@ -44,10 +44,20 @@ public class Gui extends Application {
         pane.getChildren().add(polygon);
     }
 
-    private void drawInnerTriangle(Pane pane, int x, int y, int h) {
-        Polygon polygon = new Polygon(x, y, x, y);
-        polygon.setStroke(Color. BLACK);
+    // x + (2 * h / 3)
+
+    private void drawInnerTriangle(Pane pane, int x1, int y1, int x2, int y2, int x3, int y3, int h) {
+        Polygon polygon = new Polygon(x1, y1, x2, y1, x1 + (h/3), y1 - (h/3));
+        polygon.setStroke(Color.BLACK);
         polygon.setFill(null);
-        pane.getChildren().addAll(polygon);
+
+        Polygon polygon2 = new Polygon(x2 + (2 * h/3), y1, x1 + 2 * h, y1, x2 + h, y3);
+        polygon2.setStroke(Color.BLACK);
+        polygon2.setFill(null);
+
+        Polygon polygon3 = new Polygon(x2, y2, x2 + (2 * h/3), y2, x3 + h, y1 - h);
+        polygon3.setStroke(Color.BLACK);
+        polygon3.setFill(null);
+        pane.getChildren().addAll(polygon, polygon2, polygon3);
     }
 }
