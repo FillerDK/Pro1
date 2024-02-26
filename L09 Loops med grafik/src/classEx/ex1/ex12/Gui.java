@@ -35,7 +35,6 @@ public class Gui extends Application {
 
         drawTriangle(pane, x, y, h);
         drawInnerTriangle(pane, x, y, h);
-
     }
     private void drawTriangle(Pane pane, int x, int y, int h) {
         Polygon polygon = new Polygon(x, y, x + 2 * h, y, x + h, y - h);
