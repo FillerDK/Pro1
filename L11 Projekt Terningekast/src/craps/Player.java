@@ -37,7 +37,7 @@ public class Player {
                 points = sum;
                 firstThrow = false;
                 System.out.println("Your points are now set to: " + points);
-                System.out.println("\nTry again!");
+                System.out.println("\nRoll again!");
             }
         } else if (points == sum) {
             System.out.println("YOU WIN!");
@@ -45,7 +45,7 @@ public class Player {
         } else if (sum == 7) {
             System.out.println("YOU LOST!");
             finished = true;
-        } else System.out.println("\nTry again!");
+        } else System.out.println("\nRoll again!");
     }
 
     public void play() {
