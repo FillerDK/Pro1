@@ -6,7 +6,7 @@ public class RollOneDieGame {
         System.out.println();
 
         Player player = new Player();
-        System.out.println("Plying RollOneDice.");
+        System.out.println("Playing RollOneDice.");
         player.play();
 
         printResults(player);
