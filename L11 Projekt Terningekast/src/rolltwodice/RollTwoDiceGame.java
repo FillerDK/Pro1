@@ -5,7 +5,7 @@ public class RollTwoDiceGame {
         printRules();
         System.out.println();
 
-        rolltwodice.Player player = new rolltwodice.Player();
+        Player player = new Player();
         System.out.println("Playing RollTwoDice.");
         player.play();
 
