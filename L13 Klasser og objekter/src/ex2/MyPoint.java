@@ -1,8 +1,8 @@
 package ex2;
 
 public class MyPoint {
-    double x;
-    double y;
+    private double x;
+    private double y;
 
     public double getX() {
         return x;
@@ -23,7 +23,7 @@ public class MyPoint {
     }
 
     double distance(double x2, double y2) {
-        return Math.sqrt((this.x - x2) *  (this.x - x2) + (this.y - y2) *  (this.y - y2));
+        return Math.sqrt((this.x - x2) * (this.x - x2) + (this.y - y2) * (this.y - y2));
     }
 
     public String toString() {

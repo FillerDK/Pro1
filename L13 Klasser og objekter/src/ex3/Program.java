@@ -32,6 +32,6 @@ public class Program {
 
         // h) Udskriv den sidste halvdel af strengen fra opgave d).
         // (Brug ord3.length() metoden)
-        System.out.println("h) " + ord3.substring(ord3.length() / 2, ord3.length()));
+        System.out.println("h) " + ord3.substring(ord3.length() / 2));
     }
 }

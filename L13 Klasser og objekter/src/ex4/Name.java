@@ -2,11 +2,12 @@ package ex4;
 
 public class Name {
     public static void main(String[] args) {
-        Name name = new Name("Margrethe", "test", "Dybdahl");
-        System.out.println(name.getFullName());
-        System.out.println(name.username());
-        System.out.println(name.getInits());
-        System.out.println(name.getCryptoInits(1));
+        Name piotr = new Name("Piotr", "Suski");
+        Name margrethe = new Name("Margrethe", "Sophie", "Dybdahl");
+        System.out.println(piotr.getFullName());
+        System.out.println(piotr.username());
+        System.out.println(piotr.getInits());
+        System.out.println(piotr.getCryptoInits(2));
     }
 
     String firstName;
@@ -15,6 +16,7 @@ public class Name {
 
     public Name(String firstName, String lastName) {
         this.firstName = firstName;
+        this.middleName = null;
         this.lastName = lastName;
     }
 
@@ -37,15 +39,18 @@ public class Name {
     }
 
     public String getCryptoInits(int count) {
-        String cryptoInits = getInits();
-        for (int i = 0; i < getInits().length(); i++) {
-          //  cryptoInits = getInits().replace(getInits().charAt(i), getInits());
-        } return cryptoInits;
+        char ch1 = (char) (firstName.charAt(0) + count);
+        char ch3 = (char) (lastName.charAt(0) + count);
+        if (middleName == null) {
+            return "" + ch1 + ch3;
+        } else {
+            char ch2 = (char) (middleName.charAt(0) + count);
+            return "" + ch1 + ch2 + ch3;
+        }
     }
 
     public String username() {
-        if (middleName == null)
-            return String.format("%s%d%s", firstName.substring(0, 2).toUpperCase(), 0, lastName.substring(lastName.length() - 2, lastName.length()).toLowerCase());
-        else return String.format("%s%d%s", firstName.substring(0, 2).toUpperCase(), middleName.length(), lastName.substring(lastName.length() - 2, lastName.length()).toLowerCase());
+        int lenghtMiddleName = (middleName != null) ? middleName.length() : 0;
+        return String.format("%s%d%s", firstName.substring(0, 2).toUpperCase(), lenghtMiddleName, lastName.substring(lastName.length() - 2, lastName.length()).toLowerCase());
     }
 }

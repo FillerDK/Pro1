@@ -1,5 +1,7 @@
 package ex1.B101;
 
+import java.nio.file.Watchable;
+
 public class WeatherStation {
      double temperature;
      double pressure;
@@ -46,11 +48,11 @@ public class WeatherStation {
         this.pressure = pressure * 14.503773773;
     }
 
-    public void fromImperial(double fahrenheit, double psi) {
+    public static WeatherStation fromImperial(double fahrenheit, double psi) {
         double toCelsius = (fahrenheit - 32) / 1.8;
         double toBar = psi / 14.503773773;
-        temperature = toCelsius;
-        pressure = toBar;
+        WeatherStation imperialWeatherStation = new WeatherStation(toCelsius, toBar);
+        return imperialWeatherStation;
     }
 
     public String toString() {
