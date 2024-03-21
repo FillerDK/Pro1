@@ -81,10 +81,19 @@ public class Ex4Test {
         if (list.size() >= 1) {
             list.addFirst(list.getLast());
             list.removeLast();
+            // list.addFirst(list.remove(list.size() - 1);
         }
     }
 
     public static boolean hasDoublets(ArrayList<Integer> list) {
+        // while and for statements with nested return = ugly programming
+
+        // for (int value : list) {
+        //      if (list.indexOf(value) != list.indexOf(value)) return true
+        // } return false
+
+        if (list.size() < 2) return false;
+
         boolean hasDoublets = false;
         int count = 0;
         for (int i = 0; i < list.size(); i++) {
