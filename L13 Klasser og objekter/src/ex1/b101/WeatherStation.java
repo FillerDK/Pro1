@@ -1,6 +1,4 @@
-package ex1.B101;
-
-import java.nio.file.Watchable;
+package ex1.b101;
 
 public class WeatherStation {
      double temperature;

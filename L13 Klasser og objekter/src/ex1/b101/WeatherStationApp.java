@@ -1,4 +1,4 @@
-package ex1.B101;
+package ex1.b101;
 
 public class WeatherStationApp {
     public static void main(String[] args) {

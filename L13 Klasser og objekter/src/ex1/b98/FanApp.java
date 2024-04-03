@@ -1,4 +1,4 @@
-package ex1.B98;
+package ex1.b98;
 
 public class FanApp {
     public static void main(String[] args) {

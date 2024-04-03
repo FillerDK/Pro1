@@ -1,4 +1,4 @@
-package ex1.B98;
+package ex1.b98;
 
 public class Fan {
     public static final int SLOW = 1;

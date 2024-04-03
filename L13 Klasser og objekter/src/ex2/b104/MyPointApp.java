@@ -1,4 +1,4 @@
-package ex2;
+package ex2.b104;
 
 public class MyPointApp {
     public static void main(String[] args) {

@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class GUIBoysAndGirls extends Application {
             rb.setText(genderStrings[i]);
             rb.setPrefWidth(70);
             rb.setToggleGroup(group);
-            //rb.setOnAction(event -> );
+            rb.setOnAction(event -> this.setListviewGender());
         }
 
         Label lblNames = new Label("Names:");
@@ -87,6 +88,17 @@ public class GUIBoysAndGirls extends Application {
             txfName.clear();
             txfName.requestFocus();
             lvwNames.getItems().setAll(names);
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // RadioButton action
+
+    private void setListviewGender() {
+        RadioButton rb = (RadioButton) group.getSelectedToggle();
+        lvwNames.getItems().clear();
+        for (int i = 0; i < names.size(); i++) {
+    //        lvwNames.getItems().set(i, );
         }
     }
 
