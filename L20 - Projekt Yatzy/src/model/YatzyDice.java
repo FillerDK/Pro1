@@ -41,15 +41,15 @@ public class YatzyDice {
      * Reset the throw count.
      */
     public void resetThrowCount() {
-        // TODO
+        throwCount = 0;
     }
 
     /**
      * Roll the 5 dice. Only roll dice that are not hold.<br/>
      * Note: holdStatus[i] is true, if die number i is hold (for i in [0..4]).
      */
-    public void throwDice(boolean[] holdStatus) {
-        // TODO
+    public void throwDice(/*boolean[] holdStatus*/) {
+        throwCount++;
     }
 
     // -------------------------------------------------------------------------
@@ -61,19 +61,19 @@ public class YatzyDice {
      * if you don't want use it.
      */
     public int[] getResults() {
-        int[] results = new int[15];
+        int[] results = new int[16];
         for (int i = 1; i <= 6; i++) {
             results[i] = this.sameValuePoints(i);
         }
-        results[6] = this.onePairPoints();
-        results[7] = this.twoPairPoints();
-        results[8] = this.threeSamePoints();
-        results[9] = this.fourSamePoints();
-        results[10] = this.fullHousePoints();
-        results[11] = this.smallStraightPoints();
-        results[12] = this.largeStraightPoints();
-        results[13] = this.chancePoints();
-        results[14] = this.yatzyPoints();
+        results[7] = this.onePairPoints();
+        results[8] = this.twoPairPoints();
+        results[9] = this.threeSamePoints();
+        results[10] = this.fourSamePoints();
+        results[11] = this.fullHousePoints();
+        results[12] = this.smallStraightPoints();
+        results[13] = this.largeStraightPoints();
+        results[14] = this.chancePoints();
+        results[15] = this.yatzyPoints();
 
         return results;
     }
@@ -85,8 +85,11 @@ public class YatzyDice {
     // Index 0 is not used.
     // Note: This method can be used in several of the following methods.
     private int[] frequency() {
-        //TODO
-        return null;
+        int[] frequency = new int[7];
+        for (int v = 0; v < values.length; v++) {
+            frequency[values[v]]++;
+        }
+        return frequency;
     }
 
     /**
@@ -95,8 +98,7 @@ public class YatzyDice {
      * Pre: 1 <= value <= 6.
      */
     public int sameValuePoints(int value) {
-        // TODO
-        return 0;
+        return value * frequency()[value];
     }
 
     /**
@@ -104,8 +106,7 @@ public class YatzyDice {
      * Return 0, if there aren't 2 dice with the same face value.
      */
     public int onePairPoints() {
-        // TODO
-        return 0;
+        return samePoints(2);
     }
 
     /**
@@ -115,7 +116,14 @@ public class YatzyDice {
      * and 2 other dice with the same but different face value.
      */
     public int twoPairPoints() {
-        // TODO
+        int[] frequency = frequency();
+        for (int i = frequency.length - 1; i >= 0; i--)
+            if (frequency[i] >= 2) {
+                for (int j = i - 1; j >= 0; j--)
+                    if (frequency[j] >= 2) {
+                        return i * 2 + j * 2;
+                    }
+            }
         return 0;
     }
 
@@ -124,8 +132,7 @@ public class YatzyDice {
      * Return 0, if there aren't 3 dice with the same face value.
      */
     public int threeSamePoints() {
-        // TODO
-        return 0;
+        return samePoints(3);
     }
 
     /**
@@ -133,8 +140,7 @@ public class YatzyDice {
      * Return 0, if there aren't 4 dice with the same face value.
      */
     public int fourSamePoints() {
-        // TODO
-        return 0;
+        return samePoints(4);
     }
 
     /**
@@ -143,7 +149,23 @@ public class YatzyDice {
      * and 2 other dice with the same but different face value.
      */
     public int fullHousePoints() {
-        // TODO
+        int[] frequency = frequency();
+        for (int i = frequency.length - 1; i >= 0; i--)
+            if (frequency[i] >= 2) {
+                if (frequency[i] >= 3) {
+                    for (int j = i - 1; j >= 0; j--) {
+                        if (frequency[j] >= 2) {
+                            return i * 3 + j * 2;
+                        }
+                    }
+                } else {
+                    for (int j = i - 1; j >= 0; j--) {
+                        if (frequency[j] >= 2) {
+                            return i * 2 + j * 3;
+                        }
+                    }
+                }
+            }
         return 0;
     }
 
@@ -152,8 +174,13 @@ public class YatzyDice {
      * Return 0, if the dice aren't showing 1,2,3,4,5.
      */
     public int smallStraightPoints() {
-        // TODO
-        return 0;
+        int[] frequency = frequency();
+        for (int i = 1; i <= 5; i++) {
+            if (frequency[i] != 1) {
+                return 0;
+            }
+        }
+        return 15;
     }
 
     /**
@@ -161,16 +188,23 @@ public class YatzyDice {
      * Return 0, if the dice aren't showing 2,3,4,5,6.
      */
     public int largeStraightPoints() {
-        // TODO
-        return 0;
+        int[] frequency = frequency();
+        for (int i = 2; i <= 6; i++) {
+            if (frequency[i] != 1) {
+                return 0;
+            }
+        }
+        return 20;
     }
 
     /**
      * Return points for chance (the sum of face values).
      */
     public int chancePoints() {
-        // TODO
-        return 0;
+        int sum = 0;
+        for (int i = 0; i < values.length; i++) {
+            sum += values[i];
+        } return sum;
     }
 
     /**
@@ -178,7 +212,20 @@ public class YatzyDice {
      * Return 0, if there aren't 5 dice with the same face value.
      */
     public int yatzyPoints() {
-        // TODO
+        int[] frequency = frequency();
+        for (int i = 0; i < frequency.length; i++) {
+            if (frequency[i] == 5)
+                return 50;
+        }
+        return 0;
+    }
+
+    // -------------------------------------------------------------------------
+    // helper method
+    private int samePoints(int value) {
+        int[] frequency = frequency();
+        for (int i = frequency.length - 1; i >= 0; i--)
+            if (frequency[i] >= value) return (i * value);
         return 0;
     }
 }
