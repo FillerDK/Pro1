@@ -1,14 +1,12 @@
 package gui;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -18,14 +16,12 @@ import javafx.scene.media.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import model.YatzyDice;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class YatzyGui extends Application {
     public YatzyGui() throws FileNotFoundException {
@@ -34,18 +30,24 @@ public class YatzyGui extends Application {
     private YatzyDice dice = new YatzyDice();
 
     // region # AUDIO #
-    Media tatsuroMedia = new Media(new File("C:\\Users\\phili\\Desktop\\Datamatiker\\1. semester\\Pro-1\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\tatsuro.wav").toURI().toString());
+    Media tatsuroMedia = new Media(new File("D:\\IdeaProjects\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\tatsuro.wav").toURI().toString());
+    Media diceRollMedia = new Media(new File("D:\\IdeaProjects\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\diceRoll.wav").toURI().toString());
+    Media diceShakeMedia = new Media(new File("D:\\IdeaProjects\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\diceShake.wav").toURI().toString());
+    Media popMedia = new Media(new File("D:\\IdeaProjects\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\pop.wav").toURI().toString());
     MediaPlayer tatsuroPlayer = new MediaPlayer(tatsuroMedia);
-    Media diceRollMedia = new Media(new File("C:\\Users\\phili\\Desktop\\Datamatiker\\1. semester\\Pro-1\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\diceRoll.wav").toURI().toString());
     MediaPlayer diceRollPlayer = new MediaPlayer(diceRollMedia);
-    Media diceShakeMedia = new Media(new File("C:\\Users\\phili\\Desktop\\Datamatiker\\1. semester\\Pro-1\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\diceShake.wav").toURI().toString());
     MediaPlayer diceShakePlayer = new MediaPlayer(diceShakeMedia);
-    Media popMedia = new Media(new File("C:\\Users\\phili\\Desktop\\Datamatiker\\1. semester\\Pro-1\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\pop.wav").toURI().toString());
     MediaPlayer popPlayer = new MediaPlayer(popMedia);
     // endregion
 
     Stage window;
     Scene mainScene, gameScene, settingsScene;
+
+    private final String[] colorSchemes = {"Choose color scheme:", "Dark-mode", "Classic", "Funky"};
+    private final ComboBox cbxColorScheme = new ComboBox(FXCollections.observableArrayList(colorSchemes));
+    private String currentColorScheme = "Dark-mode";
+    private Color currentTextColor = Color.WHITE;
+    private String backgroundColor = "-fx-background-color: black ; ";
 
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
@@ -53,60 +55,114 @@ public class YatzyGui extends Application {
 
         // Gridpanes
         GridPane gamePane = new GridPane(); // gameplay pane
-        gamePane.setStyle("-fx-background-color: black ; ");
+        gamePane.setStyle(backgroundColor);
         GridPane mainPane = new GridPane(); // main menu pane
-        mainPane.setStyle("-fx-background-color: black ; ");
+        mainPane.setStyle(backgroundColor);
         mainPane.setPadding(new Insets(10));
-        GridPane mainPane1 = new GridPane(); // main menu pane
-        mainPane1.setHgap(10);
-        mainPane1.setVgap(10);
-        mainPane1.setPadding(new Insets(10));
-        mainPane1.setStyle("-fx-border-radius: 10px ; " +
-                "-fx-border-width: 5px ; " +
-                "-fx-border-color: purple ; " +
-                "-fx-border-style: solid ; " +
-                "-fx-background-color: black ; ");
+        GridPane mainInnerPane = new GridPane(); // main menu inner pane
+        mainInnerPane.setHgap(10);
+        mainInnerPane.setVgap(10);
+        mainInnerPane.setPadding(new Insets(10)); // setting padding for fake margin
+        mainInnerPane.setStyle(setCustomStyle("Dark-mode"));
         GridPane settingsPane = new GridPane(); // settings pane
-        settingsPane.setStyle("-fx-background-color: black ; ");
+        settingsPane.setStyle(backgroundColor);
+        settingsPane.setPadding(new Insets(10));
+        GridPane settingsInnerPane = new GridPane(); // settings inner pane
+        settingsInnerPane.setHgap(10);
+        settingsInnerPane.setVgap(10);
+        settingsInnerPane.setPadding(new Insets(10));
+        settingsInnerPane.setStyle(setCustomStyle(currentColorScheme));
 
         this.initContent(gamePane);
 
+        // all scenes
         Scene gameScene = new Scene(gamePane);
         Scene mainScene = new Scene(mainPane);
         Scene settingsScene = new Scene(settingsPane);
 
-        Font fontLbl = Font.loadFont(new FileInputStream("C:\\Users\\phili\\Desktop\\Datamatiker\\1. semester\\Pro-1\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\fonts\\PublicPixel-z84yD.ttf"), 100);
-        Font fontBtn = Font.loadFont(new FileInputStream("C:\\Users\\phili\\Desktop\\Datamatiker\\1. semester\\Pro-1\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\fonts\\PublicPixel-z84yD.ttf"), 20);
-
+        // main scene elements
         Label lblWelcome = new Label("Yatzy");
-        lblWelcome.setFont(fontLbl);
-        lblWelcome.setTextFill(Color.WHITE);
+        lblWelcome.setFont(setCustomFont("PublicPixel-z84yD", 100));
+        lblWelcome.setTextFill(currentTextColor);
         GridPane.setHalignment(lblWelcome, HPos.RIGHT);
 
         Button btnPlay = new Button("Play");
-        mainPane1.add(btnPlay, 0, 1);
-        btnPlay.setFont(fontBtn);
+        mainInnerPane.add(btnPlay, 0, 1);
+        btnPlay.setFont(setCustomFont("PublicPixel-z84yD", 20));
         GridPane.setHalignment(btnPlay, HPos.CENTER);
 
         Button btnSettings = new Button("Settings");
-        mainPane1.add(btnSettings, 0, 2);
-        btnSettings.setFont(fontBtn);
+        mainInnerPane.add(btnSettings, 0, 2);
+        btnSettings.setFont(setCustomFont("PublicPixel-z84yD", 20));
         GridPane.setHalignment(btnSettings, HPos.CENTER);
 
-        btnPlay.setOnAction(event -> window.setScene(gameScene));
-        btnSettings.setOnAction(event -> window.setScene(settingsScene));
+        // main scene actions
+        btnPlay.setOnAction(event -> {
+            window.setScene(gameScene);
+            window.setTitle("Yatzy");
+            tatsuroPlayer.setVolume(0.4);
+            tatsuroPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            tatsuroPlayer.play();
+        });
+        btnSettings.setOnAction(event -> {
+            window.setScene(settingsScene);
+            window.setTitle("Settings");
+        });
 
-        mainPane1.add(lblWelcome, 0, 0);
-        mainPane.add(mainPane1, 0, 0);
+        // innner pane in pane to create margin effect
+        mainInnerPane.add(lblWelcome, 0, 0);
+        mainPane.add(mainInnerPane, 0, 0);
+
+        // settings elements
+        Label lblTitle = new Label("Settings");
+        lblTitle.setFont(setCustomFont("PublicPixel-z84yD", 90));
+        lblTitle.setTextFill(currentTextColor);
+        lblTitle.setPadding(new Insets(25));
+        lblTitle.setUnderline(true);
+        GridPane.setHalignment(lblTitle, HPos.CENTER);
+
+        Button btnBack = new Button("Back");
+        btnBack.setFont(setCustomFont("PublicPixel-z84yD", 20));
+        btnBack.setTextFill(Color.BLACK);
+        btnBack.setUnderline(true);
+        GridPane.setHalignment(btnBack, HPos.LEFT);
+
+        cbxColorScheme.getSelectionModel().selectFirst();
+        GridPane.setHalignment(cbxColorScheme, HPos.CENTER);
+        settingsInnerPane.add(lblTitle, 0, 0);
+        settingsInnerPane.add(cbxColorScheme, 0, 1);
+
+        settingsInnerPane.add(btnBack, 0,2);
+        btnBack.setOnAction(event -> {
+            window.setScene(mainScene);
+            window.setTitle("Main Menu");
+        });
+
+        Button btnApply = new Button("Apply");
+        btnApply.setFont(setCustomFont("PublicPixel-z84yD", 20));
+        btnApply.setTextFill(Color.BLACK);
+        btnApply.setUnderline(true);
+        GridPane.setHalignment(btnApply, HPos.RIGHT);
+
+        settingsInnerPane.add(btnApply, 0, 2);
+        btnApply.setOnAction(event -> {
+            if (!cbxColorScheme.getValue().toString().equals("Choose color scheme:")) {
+                settingsInnerPane.setStyle(setCustomStyle(currentColorScheme));
+                currentTextColor = setCustomColor();
+                backgroundColor = setCustomBackgroundColor();
+                currentColorScheme = cbxColorScheme.getValue().toString();
+                lblTitle.setTextFill(currentTextColor);
+                settingsPane.setStyle(backgroundColor);
+            }
+        });
+
+        // inner pane in pane to create margin effect
+        settingsPane.add(settingsInnerPane, 0, 0);
 
         primaryStage.setScene(mainScene);
-        primaryStage.setTitle("Yatzy");
+        primaryStage.setTitle("Main Menu");
         primaryStage.setResizable(false);
         primaryStage.show();
-
-
-        tatsuroPlayer.setVolume(0.4);
-        tatsuroPlayer.play();
     }
 
     // -------------------------------------------------------------------------
@@ -146,19 +202,13 @@ public class YatzyGui extends Application {
         pane.setVgap(10);
 
         // ======================== U P P E R - P A N E =====================
-
-        Font font = Font.loadFont(new FileInputStream("C:\\Users\\phili\\Desktop\\Datamatiker\\1. semester\\Pro-1\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\fonts\\PublicPixel-z84yD.ttf"), 10);
         GridPane dicePane = new GridPane();
         pane.add(dicePane, 0, 0);
         dicePane.setGridLinesVisible(false);
         dicePane.setPadding(new Insets(10));
         dicePane.setHgap(10);
         dicePane.setVgap(20);
-        dicePane.setStyle("-fx-border-radius: 10px ; " +
-                "-fx-border-width: 5px ; " +
-                "-fx-border-color: purple ; " +
-                "-fx-border-style: solid ; " +
-                "-fx-background-color: black ; ");
+        dicePane.setStyle(setCustomStyle("Dark-mode"));
 
         HBox diceBox = new HBox();
         dicePane.add(diceBox, 0, 0);
@@ -177,18 +227,12 @@ public class YatzyGui extends Application {
         letterImages.add(diceImage.tImage);
         letterImages.add(diceImage.zImage);
         letterImages.add(diceImage.y2Image);
-        diceImages.add(diceImage.imageDice1);
-        diceImages.add(diceImage.imageDice2);
-        diceImages.add(diceImage.imageDice3);
-        diceImages.add(diceImage.imageDice4);
-        diceImages.add(diceImage.imageDice5);
-        diceImages.add(diceImage.imageDice6);
-        diceGifs.add(diceImage.gifImage1);
-        diceGifs.add(diceImage.gifImage2);
-        diceGifs.add(diceImage.gifImage3);
-        diceGifs.add(diceImage.gifImage4);
-        diceGifs.add(diceImage.gifImage5);
-        diceGifs.add(diceImage.gifImage6);
+        for (int i = 0; i < 6; i++) {
+            diceImages.add(diceImage.getImageDice(i));
+        }
+        for (int i = 0; i < 6; i++) {
+            diceGifs.add(diceImage.getGifImage(i));
+        }
         // endregion
 
         for (int i = 0; i < 5; i++) {
@@ -199,19 +243,19 @@ public class YatzyGui extends Application {
             cbxHolds[i].setDisable(true);
             cbxHolds[i].setFocusTraversable(false);
             cbxHolds[i].setOnAction(event -> cbxHoldsAction());
-            cbxHolds[i].setFont(font);
-            cbxHolds[i].setTextFill(Color.WHITE);
+            cbxHolds[i].setFont(setCustomFont("PublicPixel-z84yD", 10));
+            cbxHolds[i].setTextFill(currentTextColor);
             vBox.getChildren().addAll(diceImageView.get(i), cbxHolds[i]);
             vBox.setSpacing(10);
             vBox.setAlignment(Pos.CENTER);
             diceBox.getChildren().add(vBox);
         }
         dicePane.add(lblThrowCount, 0, 1);
-        lblThrowCount.setFont(font);
-        lblThrowCount.setTextFill(Color.WHITE);
+        lblThrowCount.setFont(setCustomFont("PublicPixel-z84yD", 10));
+        lblThrowCount.setTextFill(currentTextColor);
         dicePane.add(btnThrow, 0, 1);
         btnThrow.setFocusTraversable(false);
-        btnThrow.setFont(font);
+        btnThrow.setFont(setCustomFont("PublicPixel-z84yD", 10));
         btnThrow.setTextFill(Color.BLACK);
         btnThrow.setOnAction(event -> {
             throwAction();
@@ -229,11 +273,7 @@ public class YatzyGui extends Application {
         scorePane.setHgap(10);
         scorePane.setMinWidth(dicePane.getWidth());
         int txfWidth = 50;
-        scorePane.setStyle("-fx-border-radius: 10px ; " +
-                "-fx-border-width: 5px ; " +
-                "-fx-border-color: purple ; " +
-                "-fx-border-style: solid ; " +
-                "-fx-background-color: black ; ");
+        scorePane.setStyle(setCustomStyle("Dark-mode"));
 
         for (ImageView imageView : diceImageView) {
             imageView.setFitHeight(75);
@@ -243,8 +283,8 @@ public class YatzyGui extends Application {
         for (int i = 0; i < 6; i++) {
             String str = (i + 1) + "-s";
             Label lblNums = new Label(String.format("%-5s", str));
-            lblNums.setFont(font);
-            lblNums.setTextFill(Color.WHITE);
+            lblNums.setFont(setCustomFont("PublicPixel-z84yD", 10));
+            lblNums.setTextFill(currentTextColor);
             txfResults.add(new TextField());
             txfResults.get(i).setPrefWidth(txfWidth);
             txfResults.get(i).setEditable(false);
@@ -256,8 +296,8 @@ public class YatzyGui extends Application {
         for (int i = 6; i < 15; i++) {
             Label lblNums = new Label(String.format("%-12s", strResult[i - 6]));
             txfResults.add(new TextField());
-            lblNums.setFont(font);
-            lblNums.setTextFill(Color.WHITE);
+            lblNums.setFont(setCustomFont("PublicPixel-z84yD", 10));
+            lblNums.setTextFill(currentTextColor);
             txfResults.get(i).setPrefWidth(txfWidth);
             txfResults.get(i).setEditable(false);
             txfResults.get(i).setFocusTraversable(false);
@@ -267,8 +307,8 @@ public class YatzyGui extends Application {
 
         // region # STATIC SUM LABELS AND FIELDS #
         Label lblSumSame = new Label("Sum");
-        lblSumSame.setFont(font);
-        lblSumSame.setTextFill(Color.WHITE);
+        lblSumSame.setFont(setCustomFont("PublicPixel-z84yD", 10));
+        lblSumSame.setTextFill(currentTextColor);
         scorePane.add(lblSumSame, 1, 12);
         scorePane.add(txfSumSame, 2, 12);
         txfSumSame.setPrefWidth(txfWidth);
@@ -276,8 +316,8 @@ public class YatzyGui extends Application {
         txfSumSame.setEditable(false);
         txfSumSame.setMouseTransparent(true);
         Label lblBonus = new Label("Bonus");
-        lblBonus.setFont(font);
-        lblBonus.setTextFill(Color.WHITE);
+        lblBonus.setFont(setCustomFont("PublicPixel-z84yD", 10));
+        lblBonus.setTextFill(currentTextColor);
         scorePane.add(lblBonus, 1, 11);
         scorePane.add(txfBonus, 2, 11);
         txfBonus.setPrefWidth(txfWidth);
@@ -285,8 +325,8 @@ public class YatzyGui extends Application {
         txfBonus.setEditable(false);
         txfBonus.setMouseTransparent(true);
         Label lblSumOther = new Label("Sum");
-        lblSumOther.setFont(font);
-        lblSumOther.setTextFill(Color.WHITE);
+        lblSumOther.setFont(setCustomFont("PublicPixel-z84yD", 10));
+        lblSumOther.setTextFill(currentTextColor);
         scorePane.add(lblSumOther, 6, 11);
         scorePane.add(txfSumOther, 5, 11);
         txfSumOther.setPrefWidth(txfWidth);
@@ -294,8 +334,8 @@ public class YatzyGui extends Application {
         txfSumOther.setEditable(false);
         txfSumOther.setMouseTransparent(true);
         Label lblTotal = new Label("TOTAL");
-        lblTotal.setFont(font);
-        lblTotal.setTextFill(Color.WHITE);
+        lblTotal.setFont(setCustomFont("PublicPixel-z84yD", 10));
+        lblTotal.setTextFill(currentTextColor);
         scorePane.add(lblTotal, 6, 12);
         scorePane.add(txfTotal, 5, 12);
         txfTotal.setPrefWidth(txfWidth);
@@ -307,7 +347,60 @@ public class YatzyGui extends Application {
 
     // ======================= M E T H O D S ====================================
 
-    public void throwAction() {
+    private Color setCustomColor() {
+        Color newColor = Color.BLACK;
+        if (currentColorScheme.equals("Dark-mode")) {
+            newColor = Color.WHITE;
+        } else if (currentColorScheme.equals("Classic")) {
+            newColor = Color.BLACK;
+        } else if (currentColorScheme.equals("Funky")) {
+            newColor = Color.GREEN;
+        }
+        return newColor;
+    }
+
+    private String setCustomBackgroundColor() {
+        String newBackgroundColor = "";
+        if (currentColorScheme.equals("Dark-mode")) {
+            newBackgroundColor = "-fx-background-color: black ; ";
+        } else if (currentColorScheme.equals("Classic")) {
+            newBackgroundColor = "-fx-background-color: beige ; ";
+        } else if (currentColorScheme.equals("Funky")) {
+            newBackgroundColor = "-fx-background-color: pink ; ";
+        }
+        return newBackgroundColor;
+    }
+
+    private Font setCustomFont(String name, int size) throws FileNotFoundException {
+        Font font = Font.loadFont(new FileInputStream(String.format("D:\\IdeaProjects\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\fonts\\%s.ttf", name)), size);
+        return font;
+    }
+
+    private String setCustomStyle(String colorScheme) {
+        String customStyle = "";
+        if (colorScheme.equals("Dark-mode")) {
+            customStyle = String.format("-fx-border-radius: 10px ; " +
+                    "-fx-border-width: 5px ; " +
+                    "-fx-border-color: purple ; " +
+                    "-fx-border-style: solid ; " +
+                    "-fx-background-color: black ; ");
+        } else if (colorScheme.equals("Classic")) {
+            customStyle = String.format("-fx-border-radius: 10px ; " +
+                    "-fx-border-width: 5px ; " +
+                    "-fx-border-color: black ; " +
+                    "-fx-border-style: solid ; " +
+                    "-fx-background-color: beige ; ");
+        } else if (colorScheme.equals("Funky")) {
+            customStyle = String.format("-fx-border-radius: 10px ; " +
+                    "-fx-border-width: 5px ; " +
+                    "-fx-border-color: blue ; " +
+                    "-fx-border-style: solid ; " +
+                    "-fx-background-color: pink ; ");
+        }
+        return customStyle;
+    }
+
+    private void throwAction() {
         throwDice();
         updateCounter();
         lockCbx();
@@ -315,7 +408,7 @@ public class YatzyGui extends Application {
         txfResultAction();
     }
 
-    public void playGif() {
+    private void playGif() {
         Thread t1 = new Thread(new Runnable() {
             public void run() {
                 for (CheckBox cbx : cbxHolds) {
@@ -333,7 +426,7 @@ public class YatzyGui extends Application {
         t1.start();
     }
 
-    public void throwDice() {
+    private void throwDice() {
         dice.throwDice(holdStatus);
         Thread t2 = new Thread(new Runnable() {
             public void run() {
@@ -371,7 +464,7 @@ public class YatzyGui extends Application {
         t2.start();
     }
 
-    public void printTextFieldValues() {
+    private void printTextFieldValues() {
         for (int i = 0; i < txfResults.size(); i++) {
             if (!txfResults.get(i).isDisabled()) {
                 txfResults.get(i).setText(String.valueOf(dice.getResults()[i + 1]));
@@ -480,7 +573,7 @@ public class YatzyGui extends Application {
         }
     }
 
-    public void cbxHoldsAction() {
+    private void cbxHoldsAction() {
         for (int i = 0; i < cbxHolds.length; i++) {
             if (cbxHolds[i].isSelected()) {
                 holdStatus[i] = true;
@@ -498,7 +591,7 @@ public class YatzyGui extends Application {
     }
 
     // region # AUDIO PLAY METHODS #
-    public void soundDiceShake() {
+    private void soundDiceShake() {
         diceShakePlayer.play();
         diceShakePlayer.setOnEndOfMedia(new Runnable() {
             @Override
@@ -509,7 +602,7 @@ public class YatzyGui extends Application {
         });
     }
 
-    public void soundDiceRoll() {
+    private void soundDiceRoll() {
         diceRollPlayer.play();
         diceRollPlayer.setOnEndOfMedia(new Runnable() {
             @Override
@@ -520,7 +613,7 @@ public class YatzyGui extends Application {
         });
     }
 
-    public void soundPop() {
+    private void soundPop() {
         popPlayer.play();
         popPlayer.setOnEndOfMedia(new Runnable() {
             @Override
