@@ -32,10 +32,10 @@ public class YatzyGui extends Application {
     private YatzyDice dice = new YatzyDice();
 
     // region # AUDIO #
-    Media tatsuroMedia = new Media(new File("D:\\IdeaProjects\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\tatsuro.wav").toURI().toString());
-    Media diceRollMedia = new Media(new File("D:\\IdeaProjects\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\diceRoll.wav").toURI().toString());
-    Media diceShakeMedia = new Media(new File("D:\\IdeaProjects\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\diceShake.wav").toURI().toString());
-    Media popMedia = new Media(new File("D:\\IdeaProjects\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\pop.wav").toURI().toString());
+    Media tatsuroMedia = new Media(new File("C:\\Users\\phili\\Desktop\\Datamatiker\\1. semester\\Pro-1\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\tatsuro.wav").toURI().toString());
+    Media diceRollMedia = new Media(new File("C:\\Users\\phili\\Desktop\\Datamatiker\\1. semester\\Pro-1\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\diceRoll.wav").toURI().toString());
+    Media diceShakeMedia = new Media(new File("C:\\Users\\phili\\Desktop\\Datamatiker\\1. semester\\Pro-1\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\diceShake.wav").toURI().toString());
+    Media popMedia = new Media(new File("C:\\Users\\phili\\Desktop\\Datamatiker\\1. semester\\Pro-1\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\wavFiles\\pop.wav").toURI().toString());
     MediaPlayer tatsuroPlayer = new MediaPlayer(tatsuroMedia);
     MediaPlayer diceRollPlayer = new MediaPlayer(diceRollMedia);
     MediaPlayer diceShakePlayer = new MediaPlayer(diceShakeMedia);
@@ -124,6 +124,7 @@ public class YatzyGui extends Application {
                 lblBonus.setTextFill(currentTextColor);
                 lblSumOther.setTextFill(currentTextColor);
                 lblTotal.setTextFill(currentTextColor);
+
             }
         });
         btnSettings.setOnAction(event -> {
@@ -231,12 +232,17 @@ public class YatzyGui extends Application {
     ImageView imageViewDice5 = new ImageView(diceImage.y2Image);
 
     ArrayList<ImageView> diceImageView = new ArrayList<ImageView>(5);
-    ArrayList<Image> diceImages = new ArrayList<Image>(6);
-    ArrayList<Image> diceGifs = new ArrayList<Image>(5);
+    ArrayList<Image> diceImagesDark = new ArrayList<Image>(6);
+    ArrayList<Image> diceImagesClassic = new ArrayList<Image>(6);
+    ArrayList<Image> diceImagesFunky = new ArrayList<Image>(6);
+    ArrayList<Image> diceGifsDark = new ArrayList<Image>(5);
+    ArrayList<Image> diceGifsClassic = new ArrayList<Image>(5);
+    ArrayList<Image> diceGifsFunky = new ArrayList<Image>(5);
     ArrayList<Image> letterImages = new ArrayList<Image>(5);
     ArrayList<Label> numLabels = new ArrayList<>(5);
 
     boolean[] holdStatus = new boolean[5];
+    private boolean canChoose;
 
     private void gameContent(GridPane pane, GridPane dicePane, GridPane scorePane) throws FileNotFoundException {
 
@@ -269,12 +275,31 @@ public class YatzyGui extends Application {
         letterImages.add(diceImage.tImage);
         letterImages.add(diceImage.zImage);
         letterImages.add(diceImage.y2Image);
+
+        // Dark-mode images
         for (int i = 0; i < 6; i++) {
-            diceImages.add(diceImage.getImageDice(i));
+            diceImagesDark.add(diceImage.getImageDiceDark(i));
         }
         for (int i = 0; i < 6; i++) {
-            diceGifs.add(diceImage.getGifImage(i));
+            diceGifsDark.add(diceImage.getGifImageDark(i));
         }
+
+        // Classic images
+        for (int i = 0; i < 6; i++) {
+            diceImagesClassic.add(diceImage.getImageDiceClassic(i));
+        }
+        for (int i = 0; i < 6; i++) {
+            diceGifsClassic.add(diceImage.getGifImageClassic(i));
+        }
+
+        // Funky images
+        for (int i = 0; i < 6; i++) {
+            diceImagesFunky.add(diceImage.getImageDiceFunky(i));
+        }
+        for (int i = 0; i < 6; i++) {
+            diceGifsFunky.add(diceImage.getGifImageFunky(i));
+        }
+
         // endregion
 
         for (int i = 0; i < 5; i++) {
@@ -422,6 +447,30 @@ public class YatzyGui extends Application {
 
     // ======================= M E T H O D S ====================================
 
+    public String getCurrentColorScheme() {
+        return currentColorScheme;
+    }
+
+    private void setImageTheme(int i, int value) {
+        if (currentColorScheme.equals("Dark-mode")) {
+            diceImageView.get(i).setImage(diceImagesDark.get(value - 1));
+        } else if (currentColorScheme.equals("Classic")) {
+            diceImageView.get(i).setImage(diceImagesClassic.get(value - 1));
+        } else if (currentColorScheme.equals("Funky")) {
+            diceImageView.get(i).setImage(diceImagesFunky.get(value - 1));
+        }
+    }
+
+    private void setGifTheme(int i) {
+        if (currentColorScheme.equals("Dark-mode")) {
+            diceImageView.get(i).setImage(diceGifsDark.get(i));
+        } else if (currentColorScheme.equals("Classic")) {
+            diceImageView.get(i).setImage(diceGifsClassic.get(i));
+        } else if (currentColorScheme.equals("Funky")) {
+            diceImageView.get(i).setImage(diceGifsFunky.get(i));
+        }
+    }
+
     private Color setCustomColor() {
         Color newColor = Color.BLACK;
         if (currentColorScheme.equals("Dark-mode")) {
@@ -429,7 +478,7 @@ public class YatzyGui extends Application {
         } else if (currentColorScheme.equals("Classic")) {
             newColor = Color.BLACK;
         } else if (currentColorScheme.equals("Funky")) {
-            newColor = Color.GREEN;
+            newColor = Color.rgb(255,178,0);
         }
         return newColor;
     }
@@ -447,7 +496,7 @@ public class YatzyGui extends Application {
     }
 
     private Font setCustomFont(String name, int size) throws FileNotFoundException {
-        Font font = Font.loadFont(new FileInputStream(String.format("D:\\IdeaProjects\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\fonts\\%s.ttf", name)), size);
+        Font font = Font.loadFont(new FileInputStream(String.format("C:\\Users\\phili\\Desktop\\Datamatiker\\1. semester\\Pro-1\\Pro1\\L20 - Projekt Yatzy Final\\src\\resources\\fonts\\%s.ttf", name)), size);
         return font;
     }
 
@@ -480,7 +529,6 @@ public class YatzyGui extends Application {
         updateCounter();
         lockCbx();
         playGif();
-        txfResultAction();
     }
 
     private void playGif() {
@@ -493,7 +541,7 @@ public class YatzyGui extends Application {
                 soundDiceShake();
                 for (int i = 0; i < 5; i++) {
                     if (!cbxHolds[i].isSelected()) {
-                        diceImageView.get(i).setImage(diceGifs.get(i));
+                        setGifTheme(i);
                     }
                 }
             }
@@ -516,7 +564,8 @@ public class YatzyGui extends Application {
                 for (int i = 0; i < 5; i++) {
                     int value = values[i];
                     if (!cbxHolds[i].isSelected()) {
-                        diceImageView.get(i).setImage(diceImages.get(value - 1));
+                        setImageTheme(i, value);
+                        //diceImageView.get(i).setImage(diceImagesDark.get(value - 1));
                     }
                 }
                 soundDiceRoll();
@@ -534,6 +583,7 @@ public class YatzyGui extends Application {
                     }
                 }
                 printTextFieldValues();
+                txfResultAction();
             }
         });
         t2.start();
@@ -549,30 +599,36 @@ public class YatzyGui extends Application {
                     } else if (currentColorScheme.equals("Classic")) {
                         txfResults.get(i).setStyle("-fx-control-inner-background: grey ; ");
                     } else if (currentColorScheme.equals("Funky")) {
-                        txfResults.get(i).setStyle("-fx-control-inner-background: green ; ");
+                        txfResults.get(i).setStyle("-fx-control-inner-background: blue ; ");
                     }
                 } else {
                     txfResults.get(i).setStyle("-fx-control-inner-background: white");
                 }
             }
         }
+        canChoose = true;
     }
 
     private void txfResultAction() {
         for (TextField txf : txfResults) {
             txf.setOnMouseClicked(event -> {
-                TextField result = (TextField) event.getSource();
-                if (dice.getThrowCount() > 0) {
-                    result.setDisable(true);
-                    soundPop();
+                if (!canChoose) {
+                    return;
+                } else {
+                    TextField result = (TextField) event.getSource();
+                    if (dice.getThrowCount() > 0) {
+                        result.setDisable(true);
+                        soundPop();
+                    }
+                    resetTextFieldValues();
+                    saveResults();
+                    setHoldStatus(true);
+                    canChoose = false;
+                    btnThrow.setDisable(false);
+                    dice.resetThrowCount();
+                    resetDice();
+                    newGame();
                 }
-                resetTextFieldValues();
-                saveResults();
-                setHoldStatus(true);
-                btnThrow.setDisable(false);
-                dice.resetThrowCount();
-                resetDice();
-                newGame();
             });
         }
     }
