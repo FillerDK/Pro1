@@ -83,8 +83,8 @@ public class YatzyGui extends Application {
 
         // all the scenes
         Scene gameScene = new Scene(gamePane);
-        Scene mainScene = new Scene(mainPane, 505, 245); /////////////////////////////////////
-        Scene settingsScene = new Scene(settingsPane, 505, 205);
+        Scene mainScene = new Scene(mainPane, 510, 245);
+        Scene settingsScene = new Scene(settingsPane, 510, 205);
 
         // main scene elements
         Label lblWelcome = new Label("Yatzy");
@@ -565,7 +565,6 @@ public class YatzyGui extends Application {
                     int value = values[i];
                     if (!cbxHolds[i].isSelected()) {
                         setImageTheme(i, value);
-                        //diceImageView.get(i).setImage(diceImagesDark.get(value - 1));
                     }
                 }
                 soundDiceRoll();
@@ -651,8 +650,19 @@ public class YatzyGui extends Application {
             txf.setDisable(false);
             txfSumOther.setText("");
             txfSumSame.setText("");
+            txfBonus.setText("");
             txfTotal.setText("");
         }
+        for (int i = 0; i < txfResults.size(); i++) {
+            txfResults.get(i).setStyle("-fx-control-inner-background: white");
+        }
+        for (int i = 0; i < 5; i++) {
+            cbxHolds[i].setDisable(true);
+        }
+        resetDice();
+        btnThrow.setDisable(false);
+        dice.resetThrowCount();
+        lblThrowCount.setText("ThrowCount: 0");
     }
 
     private void resetDice() {
