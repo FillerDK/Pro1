@@ -21,11 +21,18 @@ public class Test {
             guestActors1.add(name);
         }
 
+        ArrayList<String> guestActors2 = new ArrayList<>();
+        String[] gA2Names = {"Christina Pickles", "Anita Barone", "Jessica Hecht", "Mitchell Whitfield", "Elliot Gould"};
+
+        for (String name : gA2Names) {
+            guestActors1.add(name);
+        }
+
         friends.addEpisode(1, guestActors1, 22);
         friends.addEpisode(2, guestActors1, 22);
 
         System.out.println("Title: " + friends.getTitle());
         System.out.println("Cast: " + friends.getCast());
-        System.out.println("Episodes: " + Arrays.toString(friends.getEpisodes()));
+        System.out.println("Episodes:\n" + friends.getEpisodes().toString());
     }
 }

@@ -1,6 +1,7 @@
 package ex4;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Episode {
     private int number;
@@ -23,5 +24,10 @@ public class Episode {
 
     public ArrayList<String> getGuestCast() {
         return guestActors;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Episode: %d, length: %d\nGuestCast: %s\n", getNumber(), getLength(), getGuestCast());
     }
 }
