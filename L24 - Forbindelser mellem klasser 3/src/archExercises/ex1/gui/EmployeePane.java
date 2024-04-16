@@ -1,38 +1,38 @@
-package exarch.gui;
+package gui;
 
-import exarch.controller.Controller;
-import exarch.model.Company;
-import exarch.model.Employee;
+import controller.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import model.Employee;
+
 
 import java.util.Optional;
 
 public class EmployeePane extends GridPane {
     private final TextField txfName = new TextField();
-    private final TextField txfHourlyWage = new TextField();
+    private final TextField txfWage = new TextField();
     private final TextField txfCompany = new TextField();
-    private final TextField txfWeeklySalary = new TextField();
-    private final ListView<Employee> lvwEmployees = new ListView();
+    private final TextField txfSalary = new TextField();
+    private final TextField txfYear = new TextField();
+    private final ListView<Employee> lvwEmployees = new ListView<>();
 
     public EmployeePane() {
         this.setPadding(new Insets(20));
         this.setHgap(20);
         this.setVgap(10);
-        this.setGridLinesVisible(true);
+        this.setGridLinesVisible(false);
 
-        Label lblEmployees = new Label("Employees");
-        this.add(lblEmployees, 0, 0);
+        Label lblComp = new Label("Employees");
+        this.add(lblComp, 0, 0);
 
         this.add(lvwEmployees, 0, 1, 1, 5);
         lvwEmployees.setPrefWidth(200);
         lvwEmployees.setPrefHeight(200);
-        lvwEmployees.getItems().setAll(Controller.getEmployees());
-
         ChangeListener<Employee> listener = (ov, o, n) -> this.selectedEmployeeChanged();
         lvwEmployees.getSelectionModel().selectedItemProperty().addListener(listener);
 
@@ -40,14 +40,14 @@ public class EmployeePane extends GridPane {
         this.add(lblName, 1, 1);
 
         this.add(txfName, 2, 1);
-        txfName.setEditable(false);
         txfName.setPrefWidth(200);
+        txfName.setEditable(false);
 
-        Label lblHourlyWage = new Label("Hourly Wage:");
-        this.add(lblHourlyWage, 1, 2);
+        Label lblWage = new Label("Hourly Wage:");
+        this.add(lblWage, 1, 2);
 
-        this.add(txfHourlyWage, 2, 2);
-        txfHourlyWage.setEditable(false);
+        this.add(txfWage, 2, 2);
+        txfWage.setEditable(false);
 
         Label lblCompany = new Label("Company:");
         this.add(lblCompany, 1, 3);
@@ -55,14 +55,20 @@ public class EmployeePane extends GridPane {
         this.add(txfCompany, 2, 3);
         txfCompany.setEditable(false);
 
-        Label lblWeeklySalary = new Label("Weekly Salary:");
-        this.add(lblWeeklySalary, 1, 4);
+        Label lblSalary = new Label("Weekly Salary:");
+        this.add(lblSalary, 1, 4);
 
-        this.add(txfWeeklySalary, 2, 4);
-        txfWeeklySalary.setEditable(false);
+        this.add(txfSalary, 2, 4);
+        txfSalary.setEditable(false);
+
+        Label lblYear = new Label("Employment Year:");
+        this.add(lblYear, 1, 5);
+
+        this.add(txfYear, 2, 5);
+        txfYear.setEditable(false);
 
         HBox hbxButtons = new HBox(40);
-        this.add(hbxButtons, 0, 6, 3, 1);
+        this.add(hbxButtons, 0, 7, 3, 1);
         hbxButtons.setPadding(new Insets(10, 0, 0, 0));
         hbxButtons.setAlignment(Pos.BASELINE_CENTER);
 
@@ -78,6 +84,7 @@ public class EmployeePane extends GridPane {
         hbxButtons.getChildren().add(btnDelete);
         btnDelete.setOnAction(event -> this.deleteAction());
 
+        lvwEmployees.getItems().setAll(Controller.getEmployees());
         if (!lvwEmployees.getItems().isEmpty())
             lvwEmployees.getSelectionModel().select(0);
     }
@@ -85,7 +92,7 @@ public class EmployeePane extends GridPane {
     // -------------------------------------------------------------------------
 
     private void createAction() {
-        EmployeeWindow dialog = new EmployeeWindow("Create Employee", null);
+        gui.EmployeeWindow dialog = new gui.EmployeeWindow("Create Employee", null);
         dialog.showAndWait();
 
         // Wait for the modal dialog to close
@@ -100,7 +107,7 @@ public class EmployeePane extends GridPane {
         if (employee == null)
             return;
 
-        EmployeeWindow dialog = new EmployeeWindow("Update employee", employee);
+        gui.EmployeeWindow dialog = new gui.EmployeeWindow("Update Employee", employee);
         dialog.showAndWait();
 
         // Wait for the modal dialog to close
@@ -115,44 +122,43 @@ public class EmployeePane extends GridPane {
         if (employee == null)
             return;
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.initOwner(this.getScene().getWindow());
         alert.setTitle("Delete Employee");
         alert.setHeaderText("Are you sure?");
         Optional<ButtonType> result = alert.showAndWait();
 
-        // wait for the modal dialog to close
+        // Wait for the modal dialog to close
 
         if (result.isPresent() && (result.get() == ButtonType.OK)) {
             Controller.deleteEmployee(employee);
             lvwEmployees.getItems().setAll(Controller.getEmployees());
-            this.updateControls();
         }
     }
-
-    // -------------------------------------------------------------------------
 
     private void selectedEmployeeChanged() {
         this.updateControls();
     }
 
+    // -------------------------------------------------------------------------
+
     public void updateControls() {
         Employee employee = lvwEmployees.getSelectionModel().getSelectedItem();
         if (employee != null) {
             txfName.setText(employee.getName());
-            txfHourlyWage.setText("" + employee.getWage());
+            txfWage.setText("kr " + employee.getWage());
             if (employee.getCompany() != null) {
-                txfCompany.setText(employee.getCompany().toString());
-                txfWeeklySalary.setText("" + employee.getWeeklySalary());
+                txfCompany.setText("" + employee.getCompany());
+                txfSalary.setText("kr " + employee.weeklySalary());
             } else {
-                txfCompany.setText("");
-                txfWeeklySalary.setText("");
+                txfCompany.clear();
+                txfSalary.clear();
             }
         } else {
             txfName.clear();
-            txfHourlyWage.clear();
+            txfWage.clear();
             txfCompany.clear();
-            txfWeeklySalary.clear();
+            txfSalary.clear();
         }
     }
 }
