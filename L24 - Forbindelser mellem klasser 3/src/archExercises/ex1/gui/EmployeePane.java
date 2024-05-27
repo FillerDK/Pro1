@@ -9,6 +9,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import model.Employee;
+import gui.EmployeeWindow;
 
 
 import java.util.Optional;
@@ -25,12 +26,12 @@ public class EmployeePane extends GridPane {
         this.setPadding(new Insets(20));
         this.setHgap(20);
         this.setVgap(10);
-        this.setGridLinesVisible(false);
+        this.setGridLinesVisible(true);
 
         Label lblComp = new Label("Employees");
         this.add(lblComp, 0, 0);
 
-        this.add(lvwEmployees, 0, 1, 1, 5);
+        this.add(lvwEmployees, 0, 1, 1, 6);
         lvwEmployees.setPrefWidth(200);
         lvwEmployees.setPrefHeight(200);
         ChangeListener<Employee> listener = (ov, o, n) -> this.selectedEmployeeChanged();
@@ -92,7 +93,7 @@ public class EmployeePane extends GridPane {
     // -------------------------------------------------------------------------
 
     private void createAction() {
-        gui.EmployeeWindow dialog = new gui.EmployeeWindow("Create Employee", null);
+        EmployeeWindow dialog = new EmployeeWindow("Create Employee", null);
         dialog.showAndWait();
 
         // Wait for the modal dialog to close
@@ -107,7 +108,7 @@ public class EmployeePane extends GridPane {
         if (employee == null)
             return;
 
-        gui.EmployeeWindow dialog = new gui.EmployeeWindow("Update Employee", employee);
+        EmployeeWindow dialog = new EmployeeWindow("Update Employee", employee);
         dialog.showAndWait();
 
         // Wait for the modal dialog to close

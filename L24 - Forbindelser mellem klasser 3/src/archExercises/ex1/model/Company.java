@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import model.Employee;
 
 public class Company {
     private String name;

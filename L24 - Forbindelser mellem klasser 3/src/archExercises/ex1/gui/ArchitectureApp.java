@@ -4,6 +4,7 @@ import controller.Controller;
 import javafx.application.Application;
 import model.Company;
 import model.Employee;
+import gui.ArchitectureGui;
 
 public class ArchitectureApp {
 

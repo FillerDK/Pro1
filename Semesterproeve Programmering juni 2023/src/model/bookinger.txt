@@ -1,0 +1,5 @@
+Bane nr: 3, dag: 2023-06-20 kl. 10:00, spil: Single, spiller: Andreas
+Bane nr: 2, dag: 2023-06-22 kl. 10:00, spil: Double, spiller: Andreas
+Bane nr: 3, dag: 2023-06-20 kl. 11:00, spil: Double, spiller: Henrik
+Bane nr: 3, dag: 2023-06-20 kl. 16:00, spil: Double, spiller: Ulla
+Bane nr: 5, dag: 2023-06-23 kl. 17:00, spil: Single, spiller: Ulla

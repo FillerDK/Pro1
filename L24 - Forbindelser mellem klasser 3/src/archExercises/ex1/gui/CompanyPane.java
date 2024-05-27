@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import model.Company;
 import model.Employee;
+import gui.CompanyWindow;
 
 import java.util.Optional;
 

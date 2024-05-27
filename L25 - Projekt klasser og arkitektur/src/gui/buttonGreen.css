@@ -1,0 +1,14 @@
+.check-box>.box {
+    -fx-background-color: green;
+}
+
+.check-box>.box>.mark {
+    -fx-background-position: center;
+    -fx-background-repeat: stretch;
+    -fx-shape: none;
+}
+
+.check-box:selected>.box>.mark {
+    -fx-background-image: url("black.png");
+    -fx-background-color: transparent;
+}

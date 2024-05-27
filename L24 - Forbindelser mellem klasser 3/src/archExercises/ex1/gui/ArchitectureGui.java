@@ -35,14 +35,14 @@ public class ArchitectureGui extends Application {
         Tab tabCompanies = new Tab("Companies");
         tabPane.getTabs().add(tabCompanies);
 
-        CompanyPane companyPane = new CompanyPane();
+        gui.CompanyPane companyPane = new gui.CompanyPane();
         tabCompanies.setContent(companyPane);
         tabCompanies.setOnSelectionChanged(event -> companyPane.updateControls());
 
         Tab tabEmployees = new Tab("Employees");
         tabPane.getTabs().add(tabEmployees);
 
-        EmployeePane employeePane = new EmployeePane();
+        gui.EmployeePane employeePane = new gui.EmployeePane();
         tabEmployees.setContent(employeePane);
         tabEmployees.setOnSelectionChanged(event -> employeePane.updateControls());
     }

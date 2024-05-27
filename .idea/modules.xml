@@ -2,19 +2,20 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/L01 IntelliJ/L01 IntelliJ.iml" filepath="$PROJECT_DIR$/L01 IntelliJ/L01 IntelliJ.iml" />
-      <module fileurl="file://$PROJECT_DIR$/L02 24v/L02 24v.iml" filepath="$PROJECT_DIR$/L02 24v/L02 24v.iml" />
-      <module fileurl="file://$PROJECT_DIR$/L03 Variable og if-else/L03 Variable og if-else.iml" filepath="$PROJECT_DIR$/L03 Variable og if-else/L03 Variable og if-else.iml" />
-      <module fileurl="file://$PROJECT_DIR$/L04/L04.iml" filepath="$PROJECT_DIR$/L04/L04.iml" />
-      <module fileurl="file://$PROJECT_DIR$/L05/L05.iml" filepath="$PROJECT_DIR$/L05/L05.iml" />
-      <module fileurl="file://$PROJECT_DIR$/L06/L06.iml" filepath="$PROJECT_DIR$/L06/L06.iml" />
-      <module fileurl="file://$PROJECT_DIR$/L07 Arrays/L07 Arrays.iml" filepath="$PROJECT_DIR$/L07 Arrays/L07 Arrays.iml" />
-      <module fileurl="file://$PROJECT_DIR$/L08 Opsamling/L08 Opsamling.iml" filepath="$PROJECT_DIR$/L08 Opsamling/L08 Opsamling.iml" />
-      <module fileurl="file://$PROJECT_DIR$/L09 Loops med grafik/L09 Loops med grafik.iml" filepath="$PROJECT_DIR$/L09 Loops med grafik/L09 Loops med grafik.iml" />
-      <module fileurl="file://$PROJECT_DIR$/L10 Klasser og objekter/L10 Klasser og objekter.iml" filepath="$PROJECT_DIR$/L10 Klasser og objekter/L10 Klasser og objekter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/L11 Projekt Terningekast/L11 Projekt Terningekast.iml" filepath="$PROJECT_DIR$/L11 Projekt Terningekast/L11 Projekt Terningekast.iml" />
-      <module fileurl="file://$PROJECT_DIR$/L13 Klasser og objekter/L13 Klasser og objekter.iml" filepath="$PROJECT_DIR$/L13 Klasser og objekter/L13 Klasser og objekter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/L14 ArrayList/L14 ArrayList.iml" filepath="$PROJECT_DIR$/L14 ArrayList/L14 ArrayList.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KAS projekt/KAS projekt.iml" filepath="$PROJECT_DIR$/KAS projekt/KAS projekt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L01 - IntelliJ/L01 - IntelliJ.iml" filepath="$PROJECT_DIR$/L01 - IntelliJ/L01 - IntelliJ.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L02 - 24v/L02 - 24v.iml" filepath="$PROJECT_DIR$/L02 - 24v/L02 - 24v.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L03 - Variable og if-else/L03 - Variable og if-else.iml" filepath="$PROJECT_DIR$/L03 - Variable og if-else/L03 - Variable og if-else.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L04 - If-else og metoder/L04 - If-else og metoder.iml" filepath="$PROJECT_DIR$/L04 - If-else og metoder/L04 - If-else og metoder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L05 - Iteration while/L05 - Iteration while.iml" filepath="$PROJECT_DIR$/L05 - Iteration while/L05 - Iteration while.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L06 - Iteration for/L06 - Iteration for.iml" filepath="$PROJECT_DIR$/L06 - Iteration for/L06 - Iteration for.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L07 - Arrays/L07 - Arrays.iml" filepath="$PROJECT_DIR$/L07 - Arrays/L07 - Arrays.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L08 - Opsamling/L08 - Opsamling.iml" filepath="$PROJECT_DIR$/L08 - Opsamling/L08 - Opsamling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L09 - Loops med grafik/L09 - Loops med grafik.iml" filepath="$PROJECT_DIR$/L09 - Loops med grafik/L09 - Loops med grafik.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L10 - Klasser og objekter/L10 - Klasser og objekter.iml" filepath="$PROJECT_DIR$/L10 - Klasser og objekter/L10 - Klasser og objekter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L11 - Projekt Terningekast/L11 - Projekt Terningekast.iml" filepath="$PROJECT_DIR$/L11 - Projekt Terningekast/L11 - Projekt Terningekast.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L13 - Klasser og objekter/L13 - Klasser og objekter.iml" filepath="$PROJECT_DIR$/L13 - Klasser og objekter/L13 - Klasser og objekter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L14 - ArrayList/L14 - ArrayList.iml" filepath="$PROJECT_DIR$/L14 - ArrayList/L14 - ArrayList.iml" />
       <module fileurl="file://$PROJECT_DIR$/L15 - Opsamling/L15 - Opsamling.iml" filepath="$PROJECT_DIR$/L15 - Opsamling/L15 - Opsamling.iml" />
       <module fileurl="file://$PROJECT_DIR$/L16 - Projekt Klasser og metoder/L16 - Projekt Klasser og metoder.iml" filepath="$PROJECT_DIR$/L16 - Projekt Klasser og metoder/L16 - Projekt Klasser og metoder.iml" />
       <module fileurl="file://$PROJECT_DIR$/L18 - GUI 1/L18 - GUI 1.iml" filepath="$PROJECT_DIR$/L18 - GUI 1/L18 - GUI 1.iml" />
@@ -25,7 +26,15 @@
       <module fileurl="file://$PROJECT_DIR$/L22 - Forbindelser mellem klasser 1/L22 - Forbindelser mellem klasser 1.iml" filepath="$PROJECT_DIR$/L22 - Forbindelser mellem klasser 1/L22 - Forbindelser mellem klasser 1.iml" />
       <module fileurl="file://$PROJECT_DIR$/L23 - Forbindelser mellem klasser 2/L23 - Forbindelser mellem klasser 2.iml" filepath="$PROJECT_DIR$/L23 - Forbindelser mellem klasser 2/L23 - Forbindelser mellem klasser 2.iml" />
       <module fileurl="file://$PROJECT_DIR$/L24 - Forbindelser mellem klasser 3/L24 - Forbindelser mellem klasser 3.iml" filepath="$PROJECT_DIR$/L24 - Forbindelser mellem klasser 3/L24 - Forbindelser mellem klasser 3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L25 - Projekt klasser og arkitektur/L25 - Projekt klasser og arkitektur.iml" filepath="$PROJECT_DIR$/L25 - Projekt klasser og arkitektur/L25 - Projekt klasser og arkitektur.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L27 - Soening/L27 - Soening.iml" filepath="$PROJECT_DIR$/L27 - Soening/L27 - Soening.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L28 - Sortering/L28 - Sortering.iml" filepath="$PROJECT_DIR$/L28 - Sortering/L28 - Sortering.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L29 - Opsamling og semesterproeve/L29 - Opsamling og semesterproeve.iml" filepath="$PROJECT_DIR$/L29 - Opsamling og semesterproeve/L29 - Opsamling og semesterproeve.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L33 - Files and Exceptions/L33 - Files and Exceptions.iml" filepath="$PROJECT_DIR$/L33 - Files and Exceptions/L33 - Files and Exceptions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L34 - Fletning/L34 - Fletning.iml" filepath="$PROJECT_DIR$/L34 - Fletning/L34 - Fletning.iml" />
+      <module fileurl="file://$PROJECT_DIR$/L35 - Repetition og Eksamensopgaver/L35 - Repetition og Eksamensopgaver.iml" filepath="$PROJECT_DIR$/L35 - Repetition og Eksamensopgaver/L35 - Repetition og Eksamensopgaver.iml" />
       <module fileurl="file://$PROJECT_DIR$/Pro1 IntelliJ.iml" filepath="$PROJECT_DIR$/Pro1 IntelliJ.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Semesterproeve Programmering juni 2023/Semesterproeve Programmering juni 2023.iml" filepath="$PROJECT_DIR$/Semesterproeve Programmering juni 2023/Semesterproeve Programmering juni 2023.iml" />
     </modules>
   </component>
 </project>

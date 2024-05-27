@@ -1,0 +1,15 @@
+.check-box>.box {
+    -fx-background-color: green;
+    -fx-background-image: url("wheelchair.png");
+}
+
+.check-box>.box>.mark {
+    -fx-background-position: center;
+    -fx-background-repeat: stretch;
+    -fx-shape: none;
+}
+
+.check-box:selected>.box>.mark {
+    -fx-background-image: url("white.png");
+    -fx-background-color: transparent;
+}

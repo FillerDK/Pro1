@@ -1,8 +1,11 @@
 package model;
 
+import model.Company;
+
 public class Employee {
     private String name;
     private int wage; // hourly wage
+    private int employmentYear;
 
     // association 0..* --> 0..1 Company
     private Company company; // nullable
