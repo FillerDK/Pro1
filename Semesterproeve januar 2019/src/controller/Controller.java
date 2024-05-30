@@ -6,6 +6,9 @@ import model.Kunde;
 import model.Plads;
 import storage.Storage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -116,4 +119,20 @@ public abstract class Controller {
 
     // section S11
 
+    /**
+     * Printer alle forestillinger i en fil.
+     *
+     * @param filnavn Navn på fil der skal printes til.
+     */
+    public static void oversigtOverForestillinger(String filnavn) {
+        File out = new File("L35 - Repetition og Eksamensopgaver/src/semesterprøve_programmering_januar_2019/model/" + filnavn + ".txt");
+
+        try (PrintWriter writer = new PrintWriter(out)) {
+            for (Forestilling forestilling : Storage.getForestillinger()) {
+                writer.println(forestilling.getNavn());
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }

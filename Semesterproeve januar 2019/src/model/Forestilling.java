@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.print.PageFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -50,6 +49,14 @@ public class Forestilling {
         return slutDato;
     }
 
+    /**
+     * Henter navn for denne forestilling.
+     *
+     * @return
+     */
+    public String getNavn() {
+        return navn;
+    }
     // section addere
     /**
      * Tilføjer en ny bestilling til denne forestilling.
