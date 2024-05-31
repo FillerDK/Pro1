@@ -67,6 +67,11 @@ public class Forestilling {
         bestillinger.add(bestilling);
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s %s, %s", navn, startDato, slutDato);
+    }
+
     // section S3
     /**
      * Returnerer hvor mange pladser der er bestilt,

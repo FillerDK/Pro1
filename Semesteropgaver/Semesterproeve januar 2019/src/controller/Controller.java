@@ -105,12 +105,13 @@ public abstract class Controller {
                     pladserLedige = false;
                     throw new RuntimeException(
                             "En eller flere af de valgte pladser er allerede optaget!");
-                } else {
-                    bestilling = new Bestilling(dato, kunde, forestilling);
-                    bestilling.addPladser(pladser);
-                    forestilling.addBestilling(bestilling);
-                    kunde.addBestilling(bestilling);
                 }
+            }
+            if (pladserLedige) {
+                bestilling = new Bestilling(dato, kunde, forestilling);
+                bestilling.addPladser(pladser);
+                forestilling.addBestilling(bestilling);
+                kunde.addBestilling(bestilling);
             }
         }
 
@@ -125,7 +126,7 @@ public abstract class Controller {
      * @param filnavn Navn på fil der skal printes til.
      */
     public static void oversigtOverForestillinger(String filnavn) {
-        File out = new File("L35 - Repetition og Eksamensopgaver/src/semesterprøve_programmering_januar_2019/model/" + filnavn + ".txt");
+        File out = new File("Semesteropgaver/Semesterproeve januar 2019/src/model/" + filnavn + ".txt");
 
         try (PrintWriter writer = new PrintWriter(out)) {
             for (Forestilling forestilling : Storage.getForestillinger()) {

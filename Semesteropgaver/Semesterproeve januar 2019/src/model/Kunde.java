@@ -33,6 +33,11 @@ public class Kunde {
         return new ArrayList<>(bestillinger);
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s %s", navn, mobil);
+    }
+
     // section S5
     /**
      * Returnerer alle bestilte pladser til en
