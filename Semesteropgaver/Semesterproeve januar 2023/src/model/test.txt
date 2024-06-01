@@ -1,0 +1,10 @@
+Stine:
+	Android     300
+	Python      200
+Aftalt pris: 450   rabat er: 50
+
+Laura:
+	Regnbukser   80
+	Regnjakke   100
+Aftalt pris: 120   rabat er: 60
+
