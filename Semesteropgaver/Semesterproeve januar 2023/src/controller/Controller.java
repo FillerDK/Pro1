@@ -99,7 +99,7 @@ public abstract class Controller {
     /**
      * Udskriver alle salg der har været til en fil.
      *
-     * @param filnavn Filnavn på vil man ønsker at udskrive til.
+     * @param filnavn Filnavn på fil man ønsker at udskrive til.
      */
     public static void salgTilFil(String filnavn) {
         String fnavn = "Semesteropgaver/Semesterproeve januar 2023/src/model/" + filnavn + ".txt";
