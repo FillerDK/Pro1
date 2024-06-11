@@ -37,7 +37,7 @@ public class Medarbejder {
      *
      * @param vagt Vagt, som medarbejder tilknyttes
      */
-    public void addVagt(Vagt vagt) {
+    public void addVagt(Vagt vagt) throws RuntimeException {
         boolean valid = true;
         for (int i = 0; valid && i < vagter.size(); i++) {
             Vagt v = vagter.get(i);
@@ -49,7 +49,9 @@ public class Medarbejder {
             if (paramTidFra.isBefore(listTidTil) &&
                     paramTidFra.isAfter(listTidFra) ||
                     paramTidTil.isBefore(listTidTil) &&
-                            paramTidTil.isAfter(listTidFra)) {
+                            paramTidTil.isAfter(listTidFra) ||
+                    paramTidFra.isEqual(listTidFra) &&
+                            paramTidTil.isEqual(listTidTil)) {
                 valid = false;
                 String str = String.format("Medarbejder: %s, eksisterende vagt: %s", navn, v.getNavn());
                 throw new RuntimeException(str);
@@ -81,5 +83,14 @@ public class Medarbejder {
 
     public LocalTime getTypiskMødetid() {
         return typiskMødetid;
+    }
+
+    public String getNavn() {
+        return navn;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s, Typisk mødetid: %s", navn, typiskMødetid);
     }
 }

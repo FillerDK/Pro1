@@ -43,6 +43,14 @@ public abstract class Controller {
         medarbejder.addFunktion(funktion);
     }
 
+    public static void tildelVagt(Medarbejder medarbejder, Vagt vagt) {
+        try {
+            medarbejder.addVagt(vagt);
+        } catch (RuntimeException ex) {
+            throw ex;
+        }
+    }
+
     public static void initStorage() {
         // funktioner
         Funktion filetering = createFunktion("Filetering");
@@ -69,17 +77,17 @@ public abstract class Controller {
         registrerFunktion(peter, grøntsager);
         registrerFunktion(peter, sovsOgTilbehør);
         registrerFunktion(peter, buffetopfyldning);
-        peter.addVagt(røgedeÅl);
+        tildelVagt(peter, røgedeÅl);
 
         registrerFunktion(anne, grøntsager);
         registrerFunktion(anne, sovsOgTilbehør);
         registrerFunktion(anne, buffetopfyldning);
-        anne.addVagt(røgedeÅl);
+        tildelVagt(anne, røgedeÅl);
 
         registrerFunktion(marie, filetering);
         registrerFunktion(marie, grøntsager);
         registrerFunktion(marie, buffetopfyldning);
-        marie.addVagt(røgedeÅl);
+        tildelVagt(marie, røgedeÅl);
 
         registrerFunktion(torben, filetering);
         registrerFunktion(torben, sovsOgTilbehør);
@@ -97,9 +105,9 @@ public abstract class Controller {
         File out = new File(fnavn);
 
         try (PrintWriter writer = new PrintWriter(out)) {
-            writer.println("--------------------------------------");
-            writer.println(vagt.getTidFra());
-            writer.println("--------------------------------------\n");
+            writer.println("------------------------------------------------");
+            writer.println(String.format("%s (%s)", vagt.getTidFra(), vagt.getNavn()));
+            writer.println("------------------------------------------------\n");
             writer.println("Funktioner:");
             for (Antal antal : vagt.getAntal()) {
                 int medarbejdere = 0;
@@ -116,7 +124,10 @@ public abstract class Controller {
                 String str = String.format("  %s(%d, %d medarbejdere)", funktion.getNavn(), antal.getAntal(), medarbejdere);
                 writer.println(str);
             }
-            writer.println("\nMedarbejdere:");
+            writer.print("\nMedarbejdere: ");
+            for (Medarbejder medarbejder : vagt.getMedarbejdere()) {
+                writer.print(medarbejder.getNavn() + " ");
+            }
             writer.printf("\nStatus: %s", vagt.status());
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getMessage());

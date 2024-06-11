@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class Vagt {
@@ -56,6 +57,11 @@ public class Vagt {
         return navn;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s", navn);
+    }
+
     // section S2
     /**
      * Returnerer en medarbejder, som møder på den angivne tidspunkt,
@@ -87,12 +93,9 @@ public class Vagt {
      * @return tilknyttede medarbejdere ganget med vagtens varighed
      */
     public int beregnTimeforbrug() {
-        int antalMedarbejdere = medarbejdere.size();
-        int fra = tidFra.getHour();
-        int til = tidTil.getHour();
-        int vagtTid = til - fra;
+        double vagtiTimer = ChronoUnit.HOURS.between(tidFra, tidTil);
 
-        return vagtTid * antalMedarbejdere;
+        return (int) vagtiTimer * medarbejdere.size();
     }
 
     // section S4
