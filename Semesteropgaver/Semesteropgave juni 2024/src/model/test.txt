@@ -1,0 +1,6 @@
+Hold: Cyklisterne
+Ib 12341234, 25 km, badges: 25 km på én dag. 
+Ole 12345678, 45 km, badges: 25 km på én dag. 2 dage i træk. 
+Pia 12344321, 0 km, badges: -ingen badges-
+Hold: Optimisterne
+- ingen deltagere -
