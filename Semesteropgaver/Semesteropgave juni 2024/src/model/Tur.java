@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
+@SuppressWarnings("GrazieInspection")
 public class Tur {
     // section S1
     private final LocalDate dato;

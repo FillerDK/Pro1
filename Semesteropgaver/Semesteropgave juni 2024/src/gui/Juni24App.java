@@ -24,13 +24,9 @@ public class Juni24App {
         Hold optimisterne = Controller.createHold("Optimisterne");
 
         // Deltagere
-        Deltager ole = Controller.createDeltager("Ole", "12345678");
-        Deltager ib = Controller.createDeltager("Ib", "12341234");
-        Deltager pia = Controller.createDeltager("Pia", "12344321");
-
-        Controller.linkDeltagerTilHold(ole, cyklisterne);
-        Controller.linkDeltagerTilHold(ib, cyklisterne);
-        Controller.linkDeltagerTilHold(pia, cyklisterne);
+        Deltager ole = Controller.createDeltager("Ole", "12345678", cyklisterne);
+        Deltager ib = Controller.createDeltager("Ib", "12341234", cyklisterne);
+        Deltager pia = Controller.createDeltager("Pia", "12344321", cyklisterne);
 
         // Ture
         Tur ole1 = Controller.createTur(LocalDate.of(2024, 5, 15), 120, 30, ole);

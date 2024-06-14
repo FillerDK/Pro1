@@ -22,8 +22,9 @@ public abstract class Controller {
         return hold;
     }
 
-    public static Deltager createDeltager(String navn, String mobil) {
+    public static Deltager createDeltager(String navn, String mobil, Hold hold) {
         Deltager deltager = new Deltager(navn, mobil);
+        hold.addDeltager(deltager);
         return deltager;
     }
 
@@ -41,25 +42,14 @@ public abstract class Controller {
 
 
     // sammenhænge
-    public static void linkDeltagerTilHold(Deltager deltager, Hold hold) {
-        hold.addDeltager(deltager);
-    }
-
     public static void linkDeltagerTilBadge(Deltager deltager, Badge badge) {
         deltager.addBadge(badge);
         badge.addDeltager(deltager);
     }
 
-    public static ArrayList<Deltager> getDeltagere() {
-        ArrayList<Deltager> deltagere = new ArrayList<>();
-
-        for (Hold hold : Storage.getHold()) {
-            for (Deltager deltager : hold.getDeltagere()) {
-                deltagere.add(deltager);
-            }
-        }
-
-        return deltagere;
+    // getters
+    public static ArrayList<Hold> getHold() {
+        return Storage.getHold();
     }
 
     public static ArrayList<Tur> getTure(Deltager deltager) {
@@ -70,6 +60,15 @@ public abstract class Controller {
         }
 
         return ture;
+    }
+
+    // removers
+    public static void fjernHold(Hold hold) {
+        Storage.removeHold(hold);
+    }
+
+    public static void fjernDeltager(Deltager deltager, Hold hold) {
+        hold.removeDeltager(deltager);
     }
 
     // section S9
@@ -96,7 +95,7 @@ public abstract class Controller {
             }
 
             String str = String.format("%s %s, %d km, badges: %s", deltager.getNavn(),
-                    deltager.getMobil(), deltager.kmIAlt(), badgeString.toString());
+                    deltager.getMobil(), deltager.kmIAlt(), badgeString);
             deltagerOversigt.add(str);
         }
 

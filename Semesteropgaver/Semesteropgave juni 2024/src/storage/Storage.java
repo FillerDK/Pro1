@@ -1,6 +1,7 @@
 package storage;
 
 import model.Badge;
+import model.Deltager;
 import model.Hold;
 
 import java.util.ArrayList;
@@ -27,4 +28,10 @@ public abstract class Storage {
     public static ArrayList<Badge> getBadges() {
         return new ArrayList<>(badges);
     }
+
+    // removers
+    public static void removeHold(Hold hold) {
+        alleHold.remove(hold);
+    }
+
 }

@@ -9,6 +9,7 @@ public class Hold {
     /**
      * Association 1 --> 0..* Deltager
      */
+    @SuppressWarnings("GrazieInspection")
     private final ArrayList<Deltager> deltagere = new ArrayList<>();
 
     public Hold(String navn) {

@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("GrazieInspection")
 public class Deltager implements Comparable<Deltager> {
     // section S1
     private final String navn;

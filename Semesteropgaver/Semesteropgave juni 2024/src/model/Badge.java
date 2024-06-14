@@ -4,6 +4,7 @@ import storage.Storage;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("GrazieInspection")
 public class Badge {
     // section S1
     private final String beskrivelse;
